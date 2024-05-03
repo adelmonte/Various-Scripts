@@ -18,5 +18,3 @@ rfkill block bluetooth
 # Check and kill processes
 #kill_process "jamesdsp"
 kill_process "spotify"
-
-echo "Script execution complete"
