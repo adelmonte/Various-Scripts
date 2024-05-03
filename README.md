@@ -1,19 +1,19 @@
-**99-power.rules** - udev rule for laptop powerchange event (plug and unplug) which calls script cpupower-control.sh
+**99-power.rules** - A udev rule for managing laptop power state changes (connect/disconnect of power supply). It triggers the cpupower-control.sh script to adjust settings accordingly.
 
-**cpupower-control.sh** - changes intel power settings using cpupower-gui based on plugged/unplugged status
+**cpupower-control.sh** - Script that modifies Intel power settings based on the laptop's power connection status, using cpupower-gui for adjustments.
 
-**bluetooth_sleep.sh** - disables bluetooth and optionally closes spotify and jamesdsp upon closing the lid
+**bluetooth_sleep.sh** - Script that turns off Bluetooth, and optionally closes Spotify and JamesDSP, when the laptop lid is closed.
 
-**bluetooth_toggle.sh** - smart keybind for opening or closing spotify, jamesdsp, and bluetooth - all on or all off regardless of state
+**bluetooth_toggle.sh** - Script that toggles the activation state of Bluetooth, Spotify, and JamesDSP simultaneously, either turning all on or all off.
 
-**brightness-d.sh & brightness-i.sh** - use brillo to adjust laptop backlight SMOOTHLY and creates XFCE notification with scaling icon calls
+**brightness-d.sh & brightness-i.sh** - Scripts that smoothly adjust the laptop's backlight using brillo, and display an XFCE notification with a dynamic icon.
 
-**centerx.sh** - centers x11 window to center screen (adjust for resolution)
+**centerx.sh** - Script that centers an X11 window on the screen, adjusting automatically for different resolutions.
 
-**fadein.sh** - startup script to fade in backlight w/ XFCE4
+**fadein.sh** - Startup script that gradually increases the backlight brightness at login, integrated with XFCE4 environment.
 
-**home-end.sh** - keybind for toggling home/end on same key back and forth (depends on .home_end_toggle in home directory to store state)
+**home-end.sh** - Keybinding script that toggles the functionality between Home and End on the same key, storing the current state in .home_end_toggle in the user's home directory.
 
-**pagedown.sh & pageup.sh** - keybinds for page up/down
+**pagedown.sh & pageup.sh** - Scripts providing keybindings for navigating pages up or down.
 
-**removeprivate.sh** - remove empty folder left by gocryptfs-ui timer _if folder is empty_ (bound to login and suspend in XFCE)
+**removeprivate.sh** - Script that deletes an empty folder left behind by the gocryptfs-ui timer, triggered during login and suspend events in XFCE.
