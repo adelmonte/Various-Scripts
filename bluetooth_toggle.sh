@@ -22,7 +22,6 @@ if rfkill list bluetooth | grep -q "Soft blocked: yes"; then
 
     # Turn on Bluetooth
     rfkill unblock bluetooth
-    echo "Bluetooth turned on"
 
     # Start jamesdsp and spotify with environment variable
     start_process "jamesdsp" "-t"
@@ -34,9 +33,7 @@ else
     # Kill running instances of jamesdsp and spotify
     kill_process "jamesdsp"
     kill_process "spotify"
-    echo "jamesdsp and spotify killed"
-
+    
     # Turn off Bluetooth
     rfkill block bluetooth
-    echo "Bluetooth turned off"
 fi
