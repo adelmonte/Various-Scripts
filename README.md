@@ -2,7 +2,7 @@
 
 cpupower-control.sh - changes intel power settings using cpupower-gui based on plugged/unplugged status
 
-bluetooth_sleep.sh - disables bluetooth and optonally closes spotify and jamesdsp upon closing the lid
+bluetooth_sleep.sh - disables bluetooth and optionally closes spotify and jamesdsp upon closing the lid
 
 bluetooth_toggle.sh - smart keybind for opening or closing spotify, jamesdsp, and bluetooth - all on or all off regardless of state
 
