@@ -13,5 +13,7 @@
 **fadein.sh** - startup script to fade in backlight w/ XFCE4
 
 **home-end.sh** - keybind for toggling home/end on same key back and forth (depends on .home_end_toggle in home directory to store state)
-**
-pagedown.sh & pageup.sh** - keybinds for page up/down
+
+**pagedown.sh & pageup.sh** - keybinds for page up/down
+
+**removeprivate.sh** - remove empty folder left by gocryptfs-ui timer _if folder is empty_ (bound to login and suspend in XFCE)
