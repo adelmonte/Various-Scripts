@@ -1,6 +1,6 @@
 **99-power.rules** - A udev rule for managing laptop power state changes (connect/disconnect of power supply). It triggers the cpupower-control.sh script to adjust settings accordingly.
 
-**battery_optimized.sh** - Kernel Parameter Tweaks for Battery optimization
+**battery_optimized.sh** - Kernel parameter tweaks for battery optimization
 
 **cpupower-control.sh** - Modifies Intel power settings based on the laptop's power connection status, using cpupower-gui for adjustments.
 
@@ -18,6 +18,6 @@
 
 **pagedown.sh & pageup.sh** - Keybindings for navigating pages up or down.
 
-**performance_optimized.sh** - Kernel Parameter Tweaks for Performance.
+**performance_optimized.sh** - Kernel parameter tweaks for performance.
 
 **removeprivate.sh** - Script that deletes an empty folder left behind by the gocryptfs-ui timer (trigger with login and suspend events).
