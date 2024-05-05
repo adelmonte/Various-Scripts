@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Set the brightness using brillo
 #brillo -u 250000 -A 5
 brillo -A 1
 
