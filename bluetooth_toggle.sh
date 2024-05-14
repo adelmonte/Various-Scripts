@@ -18,7 +18,6 @@ start_process() {
 
 # Check the current state of Bluetooth
 if rfkill list bluetooth | grep -q "Soft blocked: yes"; then
-    # Bluetooth is currently off, turn it on
 
     # Turn on Bluetooth
     rfkill unblock bluetooth
@@ -28,12 +27,11 @@ if rfkill list bluetooth | grep -q "Soft blocked: yes"; then
     start_process "bash" "-c" "env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U"
 
 else
-    # Bluetooth is currently on, turn it off
+    # Turn off Bluetooth
+    rfkill block bluetooth
 
     # Kill running instances of jamesdsp and spotify
     kill_process "jamesdsp"
     kill_process "spotify"
     
-    # Turn off Bluetooth
-    rfkill block bluetooth
 fi
