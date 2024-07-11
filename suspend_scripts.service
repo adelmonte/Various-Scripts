@@ -1,0 +1,11 @@
+ [Unit]
+   Description=Scripts to execute before Suspend
+   Before=sleep.target
+
+   [Service]
+   User=user
+   Type=simple
+   ExecStart=/home/user/Documents/Scripts/....
+   
+   [Install]
+   WantedBy=sleep.target
