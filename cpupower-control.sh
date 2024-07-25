@@ -8,13 +8,11 @@ if [ "$power_source" -eq 1 ]; then
     cpupower-gui -b
     cpupower-gui ene --pref balance_performance
 #    balooctl6 enable
-    /home/user/Documents/Scripts/performance_optimized.sh
+ #   /home/user/Documents/Scripts/
 else
     # Laptop is unplugged
     cpupower-gui pr Battery
     cpupower-gui ene --pref power
 #    balooctl6 disable
-    /home/user/Documents/Scripts/battery_optimized.sh
+#    /home/user/Documents/Scripts/
 fi
-
-#performance
