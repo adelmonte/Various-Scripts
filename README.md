@@ -17,3 +17,5 @@
 **home-end.sh** - Keybinding that toggles the functionality between Home and End on the same key, storing the current state in.home_end_toggle in the user's home directory.
 
 **removeprivate.sh** - Script that deletes an empty folder left behind by the gocryptfs-ui timer (trigger with login and suspend events).
+
+**xfce_notification_sounds.sh*** - Enable notification sounds for anything in xfce4-notifyd
