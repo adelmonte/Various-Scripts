@@ -3,38 +3,25 @@
 # Usage: ./brightness_control.sh [up|down]
 
 ACTION="$1"
-
-# Get the backlight device path
 BACKLIGHT_PATH="/sys/class/backlight/intel_backlight"
-MAX_BRIGHTNESS=$(cat "$BACKLIGHT_PATH/max_brightness")
-CURRENT_BRIGHTNESS=$(cat "$BACKLIGHT_PATH/actual_brightness")
 
-# Calculate step size (1% of max for smooth transitions)
-STEP=$((MAX_BRIGHTNESS * 1 / 100))
+# Read values once
+read -r MAX_BRIGHTNESS < "$BACKLIGHT_PATH/max_brightness"
+read -r CURRENT_BRIGHTNESS < "$BACKLIGHT_PATH/actual_brightness"
 
-# Calculate minimum safe brightness (1% of max)
-MIN_SAFE_BRIGHTNESS=$((MAX_BRIGHTNESS * 1 / 100))
-# Ensure minimum safe brightness is at least 1
-if [ $MIN_SAFE_BRIGHTNESS -lt 1 ]; then
-    MIN_SAFE_BRIGHTNESS=1
-fi
+# Calculate step and minimum (1% of max)
+STEP=$((MAX_BRIGHTNESS / 100))
+MIN_SAFE_BRIGHTNESS=$((MAX_BRIGHTNESS / 100))
+[[ $MIN_SAFE_BRIGHTNESS -lt 1 ]] && MIN_SAFE_BRIGHTNESS=1
 
 case "$ACTION" in
-    "up")
-        # Increase brightness by step
+    up)
         NEW_BRIGHTNESS=$((CURRENT_BRIGHTNESS + STEP))
-        # Ensure we don't exceed maximum
-        if [ "$NEW_BRIGHTNESS" -gt "$MAX_BRIGHTNESS" ]; then
-            NEW_BRIGHTNESS=$MAX_BRIGHTNESS
-        fi
+        [[ $NEW_BRIGHTNESS -gt $MAX_BRIGHTNESS ]] && NEW_BRIGHTNESS=$MAX_BRIGHTNESS
         ;;
-    "down")
-        # Decrease brightness by step
+    down)
         NEW_BRIGHTNESS=$((CURRENT_BRIGHTNESS - STEP))
-        # Ensure we don't go below minimum safe brightness
-        if [ "$NEW_BRIGHTNESS" -lt "$MIN_SAFE_BRIGHTNESS" ]; then
-            NEW_BRIGHTNESS=$MIN_SAFE_BRIGHTNESS
-        fi
+        [[ $NEW_BRIGHTNESS -lt $MIN_SAFE_BRIGHTNESS ]] && NEW_BRIGHTNESS=$MIN_SAFE_BRIGHTNESS
         ;;
     *)
         echo "Usage: $0 [up|down]"
@@ -42,26 +29,26 @@ case "$ACTION" in
         ;;
 esac
 
-# Write the new brightness value
+# Write new brightness
 echo "$NEW_BRIGHTNESS" > "$BACKLIGHT_PATH/brightness"
 
-# Calculate percentage for notification
+# Calculate percentage
 BRIGHTNESS_PERCENTAGE=$((NEW_BRIGHTNESS * 100 / MAX_BRIGHTNESS))
 
-# Determine which icon to use
-if [ "$BRIGHTNESS_PERCENTAGE" -eq 0 ]; then
-    BRIGHTNESS_ICON="display-brightness-off-symbolic.svg"
-elif [ "$BRIGHTNESS_PERCENTAGE" -lt 33 ]; then
-    BRIGHTNESS_ICON="display-brightness-low-symbolic.svg"
-elif [ "$BRIGHTNESS_PERCENTAGE" -lt 67 ]; then
-    BRIGHTNESS_ICON="display-brightness-medium-symbolic.svg"
+# Determine icon
+if [[ $BRIGHTNESS_PERCENTAGE -eq 0 ]]; then
+    ICON="display-brightness-off-symbolic.svg"
+elif [[ $BRIGHTNESS_PERCENTAGE -lt 33 ]]; then
+    ICON="display-brightness-low-symbolic.svg"
+elif [[ $BRIGHTNESS_PERCENTAGE -lt 67 ]]; then
+    ICON="display-brightness-medium-symbolic.svg"
 else
-    BRIGHTNESS_ICON="display-brightness-high-symbolic.svg"
+    ICON="display-brightness-high-symbolic.svg"
 fi
 
 # Send notification
-notify-send --icon="/usr/share/icons/Papirus/16x16/symbolic/status/$BRIGHTNESS_ICON" \
-            --hint=int:value:"${BRIGHTNESS_PERCENTAGE}" \
+notify-send --icon="/usr/share/icons/Papirus/16x16/symbolic/status/$ICON" \
+            --hint=int:value:"$BRIGHTNESS_PERCENTAGE" \
             --expire-time=2000 \
             -r 5555 \
             "Screen Brightness" "Brightness: ${BRIGHTNESS_PERCENTAGE}%"

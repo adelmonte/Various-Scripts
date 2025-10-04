@@ -1,20 +1,17 @@
 #!/bin/bash
+STATE_FILE="/tmp/.home_end_toggle"
 
-# Determine the initial state (Home or End)
-if [ -f "$HOME/.home_end_toggle" ]; then
-  state=$(cat "$HOME/.home_end_toggle")
+if [ -f "$STATE_FILE" ]; then
+  state=$(cat "$STATE_FILE")
 else
   state="home"
-  echo "home" > "$HOME/.home_end_toggle"
+  echo "home" > "$STATE_FILE"
 fi
 
-# Simulate the key press
 if [ "$state" = "home" ]; then
-  xdotool key --clearmodifiers "Insert"  
-  xdotool key "Home"
-  echo "end" > "$HOME/.home_end_toggle"
+  xdotool key Insert Home
+  echo "end" > "$STATE_FILE"
 else
-  xdotool key --clearmodifiers "Insert"  
-  xdotool key "End"
-  echo "home" > "$HOME/.home_end_toggle"
+  xdotool key Insert End
+  echo "home" > "$STATE_FILE"
 fi
